@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Ciron Alpha Friends and Family</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
@@ -15,28 +19,22 @@ margin:0;
 font-family:'Inter',sans-serif;
 color:#111;
 background:#ffffff;
-line-height:1.6;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:80px 20px;
 }
 
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 40px;
+padding:22px 60px;
 border-bottom:1px solid #eee;
 position:sticky;
 top:0;
 background:white;
+z-index:10;
 }
 
 .logo{
-font-family:'Playfair Display',serif;
+font-family:'Playfair Display';
 font-size:22px;
 }
 
@@ -48,36 +46,45 @@ font-size:14px;
 }
 
 .hero{
-height:80vh;
+
+height:90vh;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
+
+background:linear-gradient(
+180deg,
+#ffffff,
+#f8f9fb
+);
+
 }
 
 .hero h1{
-font-family:'Playfair Display',serif;
-font-size:48px;
+font-family:'Playfair Display';
+font-size:56px;
 margin-bottom:20px;
 }
 
 .hero p{
 font-size:20px;
-color:#555;
+color:#666;
 max-width:700px;
 margin:auto;
 }
 
-.section-title{
-font-family:'Playfair Display',serif;
-font-size:32px;
-margin-bottom:30px;
+.container{
+max-width:1100px;
+margin:auto;
+padding:90px 20px;
 }
 
-.grid-2{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:60px;
+.section-title{
+font-family:'Playfair Display';
+font-size:34px;
+margin-bottom:40px;
+text-align:center;
 }
 
 .grid-3{
@@ -86,21 +93,40 @@ grid-template-columns:repeat(3,1fr);
 gap:40px;
 }
 
+.card{
+padding:30px;
+border:1px solid #eee;
+border-radius:6px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
 .card h3{
-margin-bottom:10px;
-font-weight:500;
+margin-bottom:12px;
 }
 
-.table{
-width:100%;
-border-collapse:collapse;
+.chart-box{
+max-width:700px;
+margin:auto;
 }
 
-.table th,
-.table td{
-padding:14px;
-border-bottom:1px solid #eee;
-text-align:left;
+.map{
+
+height:400px;
+background-image:url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg');
+background-size:cover;
+background-position:center;
+
+opacity:0.7;
+
+}
+
+.contact{
+text-align:center;
+font-size:18px;
 }
 
 .footer{
@@ -108,26 +134,22 @@ border-top:1px solid #eee;
 padding:40px;
 text-align:center;
 color:#777;
-font-size:14px;
 }
 
-@media(max-width:800px){
-
-.grid-2{
-grid-template-columns:1fr;
-}
+@media(max-width:900px){
 
 .grid-3{
 grid-template-columns:1fr;
 }
 
 .hero h1{
-font-size:34px;
+font-size:40px;
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -139,10 +161,13 @@ Ciron Alpha
 </div>
 
 <nav>
-<a href="#about">Sobre Nosotros</a>
+
+<a href="#about">Filosofía</a>
 <a href="#strategy">Estrategia</a>
 <a href="#portfolio">Portafolio</a>
+<a href="#global">Global</a>
 <a href="#contact">Contacto</a>
+
 </nav>
 
 </header>
@@ -158,7 +183,7 @@ Ciron Alpha
 Haciendo crecer el patrimonio de nuestro grupo de amigos y familia
 </p>
 
-<p style="margin-top:15px;color:#777;">
+<p style="margin-top:12px;color:#777;">
 Ciudad de México
 </p>
 
@@ -169,52 +194,30 @@ Ciudad de México
 
 <section class="container" id="about">
 
-<h2 class="section-title">Nuestra Filosofía</h2>
+<h2 class="section-title">Filosofía de Inversión</h2>
 
-<div class="grid-2">
+<p style="max-width:700px;margin:auto;text-align:center;">
 
-<div>
+Gestionamos capital de nuestro círculo cercano con un enfoque disciplinado, diversificado y de largo plazo.  
+Nuestro objetivo es capturar el crecimiento de los mercados globales manteniendo simplicidad, liquidez y eficiencia.
 
-<p>
-Ciron Alpha Friends and Family gestiona capital de nuestro círculo cercano con un enfoque disciplinado, diversificado y de largo plazo.
 </p>
-
-<p>
-Nuestro objetivo es hacer crecer el patrimonio colectivo mediante exposición a mercados globales y estrategias eficientes.
-</p>
-
-</div>
-
-<div>
-
-<ul>
-
-<li>Mercado accionario de Estados Unidos</li>
-<li>ETFs diversificados</li>
-<li>Fondos multi-activos mexicanos</li>
-<li>Estrategias líquidas</li>
-
-</ul>
-
-</div>
-
-</div>
 
 </section>
 
 
 <section class="container" id="strategy">
 
-<h2 class="section-title">Estrategia de Inversión</h2>
+<h2 class="section-title">Estrategia</h2>
 
 <div class="grid-3">
 
 <div class="card">
 
-<h3>Acciones de Estados Unidos</h3>
+<h3>Acciones de EE.UU.</h3>
 
 <p>
-Exposición a índices amplios mediante ETFs diversificados que capturan el crecimiento de las empresas líderes del mundo.
+Exposición a índices amplios mediante ETFs diversificados que replican el crecimiento del mercado accionario estadounidense.
 </p>
 
 </div>
@@ -224,17 +227,17 @@ Exposición a índices amplios mediante ETFs diversificados que capturan el crec
 <h3>Fondos Multi-Activos</h3>
 
 <p>
-Complementamos la cartera con fondos balanceados mexicanos que integran renta fija y renta variable.
+Fondos mexicanos que integran renta fija, renta variable y exposición internacional para diversificación adicional.
 </p>
 
 </div>
 
 <div class="card">
 
-<h3>Diversificación</h3>
+<h3>Asignación Disciplinada</h3>
 
 <p>
-Asignación disciplinada de activos para mantener equilibrio entre crecimiento y estabilidad.
+Rebalanceo periódico y control de riesgo para mantener un portafolio balanceado.
 </p>
 
 </div>
@@ -248,34 +251,25 @@ Asignación disciplinada de activos para mantener equilibrio entre crecimiento y
 
 <h2 class="section-title">Portafolio</h2>
 
-<table class="table">
+<div class="chart-box">
 
-<tr>
-<th>Instrumento</th>
-<th>Clase de Activo</th>
-</tr>
+<canvas id="portfolioChart"></canvas>
 
-<tr>
-<td>ETF Mercado Total US</td>
-<td>Renta Variable</td>
-</tr>
-
-<tr>
-<td>ETF S&P 500</td>
-<td>Renta Variable</td>
-</tr>
-
-<tr>
-<td>Fondo Multi-Activo México</td>
-<td>Multi-Asset</td>
-</tr>
-
-</table>
+</div>
 
 </section>
 
 
-<section class="container" id="contact">
+<section class="container" id="global">
+
+<h2 class="section-title">Exposición Global</h2>
+
+<div class="map"></div>
+
+</section>
+
+
+<section class="container contact" id="contact">
 
 <h2 class="section-title">Contacto</h2>
 
@@ -284,7 +278,7 @@ Ciron Alpha Friends and Family
 </p>
 
 <p>
-Ciudad de México, México
+Ciudad de México
 </p>
 
 <p>
@@ -300,5 +294,43 @@ contacto@cironalpha.com
 
 </div>
 
+
+<script>
+
+const ctx = document.getElementById('portfolioChart');
+
+new Chart(ctx, {
+
+type:'doughnut',
+
+data:{
+labels:[
+'US Equities',
+'Multi-Asset Funds',
+'Cash'
+],
+
+datasets:[{
+
+data:[65,25,10]
+
+}]
+
+},
+
+options:{
+plugins:{
+legend:{
+position:'bottom'
+}
+}
+
+}
+
+});
+
+</script>
+
 </body>
+
 </html>
