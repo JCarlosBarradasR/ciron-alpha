@@ -11,17 +11,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <style>
 
+/* COLOR SYSTEM */
+
 :root{
+
 --primary:#0B2545;
 --secondary:#2E5AAC;
 --accent:#4C7DFF;
 --light:#F5F7FB;
 --text:#111;
+--card:white;
+
+}
+
+.dark{
+
+--primary:#0b1320;
+--secondary:#1d3b70;
+--accent:#4C7DFF;
+--light:#0f1724;
+--text:#f1f5f9;
+--card:#172033;
+
 }
 
 html{
@@ -29,24 +44,33 @@ scroll-behavior:smooth;
 }
 
 body{
+
 margin:0;
 font-family:'Inter',sans-serif;
+background:var(--light);
 color:var(--text);
-background:white;
+
 }
 
-/* NAV */
+/* NAVBAR */
 
 header{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 padding:20px 60px;
-background:white;
-border-bottom:1px solid #eee;
+
+background:var(--card);
+
+border-bottom:1px solid rgba(0,0,0,.05);
+
 position:sticky;
 top:0;
+
 z-index:1000;
+
 }
 
 .logo{
@@ -55,29 +79,38 @@ font-size:22px;
 }
 
 nav a{
+
 margin-left:24px;
 text-decoration:none;
-color:#333;
+color:var(--text);
 font-size:14px;
-font-weight:500;
+
 }
 
-nav a:hover{
-color:var(--secondary);
+.toggle{
+cursor:pointer;
+margin-left:20px;
 }
 
 /* HERO */
 
 .hero{
+
 height:90vh;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 text-align:center;
+
 background:linear-gradient(135deg,var(--primary),var(--secondary));
+
 color:white;
+
 position:relative;
 overflow:hidden;
+
 }
 
 .hero canvas{
@@ -94,12 +127,10 @@ z-index:2;
 .hero h1{
 font-family:'Playfair Display';
 font-size:60px;
-margin-bottom:20px;
 }
 
 .hero p{
 font-size:20px;
-opacity:.9;
 }
 
 /* GENERAL */
@@ -108,10 +139,6 @@ opacity:.9;
 max-width:1100px;
 margin:auto;
 padding:100px 20px;
-}
-
-.container-light{
-background:var(--light);
 }
 
 .section-title{
@@ -124,41 +151,39 @@ margin-bottom:60px;
 /* DASHBOARD */
 
 .dashboard{
+
 display:grid;
 grid-template-columns:repeat(4,1fr);
+
 gap:30px;
+
 }
 
 .metric{
-background:white;
-border:1px solid #e5e7ef;
+
+background:var(--card);
+
 padding:30px;
+
 border-radius:8px;
+
 text-align:center;
-box-shadow:0 8px 20px rgba(0,0,0,0.04);
+
+box-shadow:0 10px 20px rgba(0,0,0,.05);
+
 }
 
 .metric-value{
 font-size:34px;
-font-weight:600;
-margin-top:10px;
 color:var(--secondary);
+font-weight:600;
 }
 
-/* FRAMEWORK */
+/* CHART */
 
-.framework{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:40px;
-}
-
-.step{text-align:center;}
-
-.step-number{
-font-size:28px;
-color:#999;
-margin-bottom:10px;
+.chart-box{
+max-width:650px;
+margin:auto;
 }
 
 /* TABLE */
@@ -169,24 +194,31 @@ border-collapse:collapse;
 }
 
 th,td{
-padding:16px;
-border-bottom:1px solid #eee;
-text-align:left;
+padding:15px;
+border-bottom:1px solid rgba(0,0,0,.1);
 }
 
 /* INSIGHTS */
 
 .insights{
+
 display:grid;
 grid-template-columns:repeat(3,1fr);
+
 gap:30px;
+
 }
 
 .card{
-background:white;
+
+background:var(--card);
+
 padding:25px;
+
 border-radius:8px;
-border:1px solid #eee;
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
 }
 
 /* MAP */
@@ -194,7 +226,6 @@ border:1px solid #eee;
 #map{
 height:420px;
 border-radius:6px;
-margin-top:40px;
 }
 
 .leaflet-pane,
@@ -206,22 +237,19 @@ z-index:1 !important;
 /* FOOTER */
 
 .footer{
+
 background:var(--primary);
 color:white;
+
 padding:50px;
 text-align:center;
-}
 
-/* MOBILE */
+}
 
 @media(max-width:900px){
 
 .dashboard{
 grid-template-columns:1fr 1fr;
-}
-
-.framework{
-grid-template-columns:1fr;
 }
 
 .insights{
@@ -246,12 +274,13 @@ font-size:42px;
 
 <nav>
 
-<a href="#philosophy">Filosofía</a>
-<a href="#framework">Framework</a>
-<a href="#portfolio">Portafolio</a>
-<a href="#insights">Insights</a>
+<a href="#portfolio">Portfolio</a>
+<a href="#performance">Performance</a>
+<a href="#research">Research</a>
 <a href="#global">Global</a>
 <a href="#contact">Contacto</a>
+
+<span class="toggle" onclick="toggleMode()">🌙</span>
 
 </nav>
 
@@ -287,17 +316,17 @@ font-size:42px;
 
 <div class="metric">
 AUM
-<div class="metric-value counter" data-target="50">$0</div>
+<div class="metric-value">$50M</div>
 </div>
 
 <div class="metric">
 Annual Return
-<div class="metric-value counter" data-target="14">0%</div>
+<div class="metric-value">14.2%</div>
 </div>
 
 <div class="metric">
-Volatility
-<div class="metric-value">9.5%</div>
+S&P 500
+<div class="metric-value" id="sp500">Loading...</div>
 </div>
 
 <div class="metric">
@@ -310,55 +339,30 @@ Sharpe Ratio
 </section>
 
 
-<!-- PHILOSOPHY -->
+<!-- ALLOCATION -->
 
-<section class="container container-light" id="philosophy">
+<section class="container" id="portfolio">
 
-<h2 class="section-title">Filosofía de Inversión</h2>
+<h2 class="section-title">Asset Allocation</h2>
 
-<p style="max-width:700px;margin:auto;text-align:center">
+<div class="chart-box">
 
-Gestionamos capital de nuestro círculo cercano con un enfoque disciplinado,
-diversificado y orientado al largo plazo. La estrategia se enfoca principalmente
-en mercados públicos globales, especialmente US equities, complementado con
-fondos multi-activos en México.
+<canvas id="allocationChart"></canvas>
 
-</p>
+</div>
 
 </section>
 
 
-<!-- FRAMEWORK -->
+<!-- PERFORMANCE -->
 
-<section class="container" id="framework">
+<section class="container" id="performance">
 
-<h2 class="section-title">Investment Framework</h2>
+<h2 class="section-title">AUM Growth</h2>
 
-<div class="framework">
+<div class="chart-box">
 
-<div class="step">
-<div class="step-number">01</div>
-<h3>Market Exposure</h3>
-<p>Capturar crecimiento global.</p>
-</div>
-
-<div class="step">
-<div class="step-number">02</div>
-<h3>Diversification</h3>
-<p>Reducir concentración.</p>
-</div>
-
-<div class="step">
-<div class="step-number">03</div>
-<h3>Risk Management</h3>
-<p>Control disciplinado del riesgo.</p>
-</div>
-
-<div class="step">
-<div class="step-number">04</div>
-<h3>Long-Term Horizon</h3>
-<p>Decisiones multianuales.</p>
-</div>
+<canvas id="aumChart"></canvas>
 
 </div>
 
@@ -367,7 +371,7 @@ fondos multi-activos en México.
 
 <!-- HOLDINGS -->
 
-<section class="container container-light" id="portfolio">
+<section class="container">
 
 <h2 class="section-title">Portfolio Holdings</h2>
 
@@ -408,9 +412,9 @@ fondos multi-activos en México.
 </section>
 
 
-<!-- INSIGHTS -->
+<!-- RESEARCH -->
 
-<section class="container" id="insights">
+<section class="container" id="research">
 
 <h2 class="section-title">Insights</h2>
 
@@ -418,17 +422,17 @@ fondos multi-activos en México.
 
 <div class="card">
 <h3>Global Markets Outlook</h3>
-<p>Perspectiva de crecimiento estructural en mercados desarrollados.</p>
+<p>Perspectiva estructural de crecimiento global.</p>
 </div>
 
 <div class="card">
-<h3>Diversification Strategy</h3>
-<p>Importancia de la diversificación entre activos globales.</p>
+<h3>Diversification</h3>
+<p>Importancia de diversificar portafolios.</p>
 </div>
 
 <div class="card">
 <h3>Long Term Investing</h3>
-<p>Disciplina y horizonte de inversión como fuente de retorno.</p>
+<p>Horizonte largo como generador de valor.</p>
 </div>
 
 </div>
@@ -436,9 +440,9 @@ fondos multi-activos en México.
 </section>
 
 
-<!-- GLOBAL -->
+<!-- MAP -->
 
-<section class="container container-light" id="global">
+<section class="container" id="global">
 
 <h2 class="section-title">Global Exposure</h2>
 
@@ -475,7 +479,13 @@ contacto@cironalpha.com
 
 <script>
 
-/* HERO MARKET LINES */
+/* DARK MODE */
+
+function toggleMode(){
+document.body.classList.toggle("dark")
+}
+
+/* HERO MARKET ANIMATION */
 
 const canvas=document.getElementById("heroCanvas")
 const ctx=canvas.getContext("2d")
@@ -483,32 +493,29 @@ const ctx=canvas.getContext("2d")
 canvas.width=window.innerWidth
 canvas.height=window.innerHeight
 
-let lines=[]
+let points=[]
 
-for(let i=0;i<25;i++){
-lines.push(Math.random()*canvas.height)
+for(let i=0;i<50;i++){
+points.push(Math.random()*canvas.height)
 }
 
 function draw(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
 
-ctx.strokeStyle="rgba(255,255,255,0.15)"
-ctx.lineWidth=2
+ctx.strokeStyle="rgba(255,255,255,.2)"
 
 ctx.beginPath()
 
-for(let i=0;i<lines.length;i++){
+points.forEach((p,i)=>{
 
-let x=i*(canvas.width/lines.length)
+let x=i*(canvas.width/points.length)
 
-let y=lines[i]
+ctx.lineTo(x,p)
 
-ctx.lineTo(x,y)
+points[i]+=Math.random()*2-1
 
-lines[i]+=Math.random()*2-1
-
-}
+})
 
 ctx.stroke()
 
@@ -518,37 +525,36 @@ requestAnimationFrame(draw)
 
 draw()
 
-/* COUNTERS */
+/* CHARTS */
 
-const counters=document.querySelectorAll(".counter")
-
-counters.forEach(counter=>{
-
-const target=+counter.getAttribute("data-target")
-
-let count=0
-
-const update=()=>{
-
-count+=target/100
-
-if(count<target){
-
-counter.innerText=Math.floor(count)
-
-requestAnimationFrame(update)
-
-}else{
-
-counter.innerText=target
-
+new Chart(
+document.getElementById('allocationChart'),
+{
+type:'doughnut',
+data:{
+labels:['US Equities','Multi-Asset','Cash'],
+datasets:[{
+data:[65,25,10],
+backgroundColor:["#2E5AAC","#4C7DFF","#BFD3FF"]
+}]
 }
-
 }
+)
 
-update()
-
-})
+new Chart(
+document.getElementById('aumChart'),
+{
+type:'line',
+data:{
+labels:['2021','2022','2023','2024','2025'],
+datasets:[{
+label:'AUM ($M)',
+data:[10,18,28,40,50],
+borderColor:"#2E5AAC"
+}]
+}
+}
+)
 
 /* MAP */
 
@@ -559,7 +565,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:5}).ad
 L.marker([40.7128,-74.006]).addTo(map).bindPopup("New York")
 L.marker([19.4326,-99.1332]).addTo(map).bindPopup("Ciudad de México")
 L.marker([51.5072,-0.1276]).addTo(map).bindPopup("London")
-L.marker([35.6762,139.6503]).addTo(map).bindPopup("Tokyo")
+
+/* SIMPLE S&P DATA (demo) */
+
+document.getElementById("sp500").innerText="~ 5,200"
 
 </script>
 
