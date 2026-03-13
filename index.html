@@ -8,9 +8,7 @@
 
 <title>Ciron Alpha Friends and Family</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -18,170 +16,270 @@
 
 <style>
 
+/* COLOR SYSTEM */
+
+:root{
+
+--primary:#0B2545;
+--secondary:#2E5AAC;
+--accent:#4C7DFF;
+--light:#F5F7FB;
+--text:#111;
+
+}
+
 body{
 margin:0;
 font-family:'Inter',sans-serif;
-background:#ffffff;
-color:#111;
+color:var(--text);
+background:white;
 }
 
-/* NAV */
+/* NAVBAR */
 
 header{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:22px 60px;
+
+padding:20px 60px;
+
+background:white;
 border-bottom:1px solid #eee;
+
 position:sticky;
 top:0;
-background:white;
-z-index:10;
+
+z-index:1000;
+
 }
 
 .logo{
+
 font-family:'Playfair Display';
 font-size:22px;
+
 }
 
 nav a{
+
 margin-left:24px;
 text-decoration:none;
-color:#111;
+color:#333;
 font-size:14px;
+font-weight:500;
+
+}
+
+nav a:hover{
+color:var(--secondary);
 }
 
 /* HERO */
 
 .hero{
+
 height:90vh;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 text-align:center;
-position:relative;
-overflow:hidden;
-background:#f7f9fc;
-}
 
-canvas{
-position:absolute;
-top:0;
-left:0;
-}
+background:linear-gradient(
+135deg,
+var(--primary),
+var(--secondary)
+);
 
-.hero-content{
-position:relative;
-z-index:2;
+color:white;
+
+padding:20px;
+
 }
 
 .hero h1{
+
 font-family:'Playfair Display';
 font-size:60px;
+
 margin-bottom:20px;
+
 }
 
 .hero p{
+
 font-size:20px;
-color:#666;
+opacity:.9;
+
 }
 
-/* GENERAL */
+/* GENERAL SECTIONS */
 
 .container{
+
 max-width:1100px;
 margin:auto;
+
 padding:100px 20px;
+
+}
+
+.container-light{
+
+background:var(--light);
+
 }
 
 .section-title{
+
 font-family:'Playfair Display';
 font-size:36px;
-margin-bottom:50px;
+
 text-align:center;
+
+margin-bottom:60px;
+
 }
 
 /* DASHBOARD */
 
 .dashboard{
+
 display:grid;
 grid-template-columns:repeat(4,1fr);
+
 gap:30px;
+
 }
 
 .metric{
-border:1px solid #eee;
+
+background:white;
+
+border:1px solid #e5e7ef;
+
 padding:30px;
+
+border-radius:8px;
+
 text-align:center;
-border-radius:6px;
+
+box-shadow:0 8px 20px rgba(0,0,0,0.04);
+
 }
 
 .metric-value{
+
 font-size:32px;
-font-weight:500;
+font-weight:600;
+
 margin-top:10px;
+
+color:var(--secondary);
+
 }
 
 /* FRAMEWORK */
 
 .framework{
+
 display:grid;
 grid-template-columns:repeat(4,1fr);
+
 gap:40px;
+
 }
 
-.step{text-align:center;}
+.step{
+text-align:center;
+}
 
 .step-number{
+
 font-size:28px;
-font-weight:500;
-color:#888;
+color:#999;
+
 margin-bottom:10px;
+
 }
 
-/* TABLE */
+/* CHART */
 
-table{
-width:100%;
-border-collapse:collapse;
-}
+.chart-box{
 
-th,td{
-padding:14px;
-border-bottom:1px solid #eee;
-text-align:left;
-}
-
-/* TIMELINE */
-
-.timeline{
-max-width:700px;
+max-width:600px;
 margin:auto;
-}
 
-.event{
-margin-bottom:30px;
-}
-
-.year{
-font-weight:500;
-margin-bottom:5px;
 }
 
 /* MAP */
 
 #map{
+
 height:420px;
+
 border-radius:6px;
+
+margin-top:40px;
+
+}
+
+/* Prevent map overlapping navbar */
+
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom{
+z-index:1 !important;
+}
+
+/* CONTACT */
+
+.contact{
+
+text-align:center;
+font-size:18px;
+
 }
 
 /* FOOTER */
 
 .footer{
-border-top:1px solid #eee;
-padding:40px;
+
+background:var(--primary);
+
+color:white;
+
+padding:50px;
+
 text-align:center;
-color:#777;
+
+margin-top:60px;
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.dashboard{
+grid-template-columns:1fr 1fr;
+}
+
+.framework{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+header{
+padding:20px;
+}
+
 }
 
 </style>
@@ -196,10 +294,11 @@ color:#777;
 
 <nav>
 
+<a href="#philosophy">Filosofía</a>
 <a href="#framework">Framework</a>
 <a href="#portfolio">Portafolio</a>
-<a href="#insights">Insights</a>
-<a href="#timeline">Historia</a>
+<a href="#performance">Performance</a>
+<a href="#global">Global</a>
 <a href="#contact">Contacto</a>
 
 </nav>
@@ -207,12 +306,11 @@ color:#777;
 </header>
 
 
+<!-- HERO -->
 
 <section class="hero">
 
-<canvas id="marketCanvas"></canvas>
-
-<div class="hero-content">
+<div>
 
 <h1>Ciron Alpha Friends and Family</h1>
 
@@ -227,6 +325,7 @@ Haciendo crecer el patrimonio de nuestro grupo de amigos y familia
 </section>
 
 
+<!-- DASHBOARD -->
 
 <section class="container">
 
@@ -259,6 +358,26 @@ Sharpe Ratio
 </section>
 
 
+<!-- PHILOSOPHY -->
+
+<section class="container container-light" id="philosophy">
+
+<h2 class="section-title">Filosofía de Inversión</h2>
+
+<p style="max-width:700px;margin:auto;text-align:center">
+
+Gestionamos capital de nuestro círculo cercano con un enfoque disciplinado,
+diversificado y orientado al largo plazo.
+
+La estrategia se enfoca principalmente en **mercados públicos globales**,
+especialmente **US equities**, complementado con **fondos multi-activos en México**.
+
+</p>
+
+</section>
+
+
+<!-- FRAMEWORK -->
 
 <section class="container" id="framework">
 
@@ -267,110 +386,43 @@ Sharpe Ratio
 <div class="framework">
 
 <div class="step">
+
 <div class="step-number">01</div>
+
 <h3>Market Exposure</h3>
-<p>Capturar crecimiento global.</p>
+
+<p>Capturar crecimiento estructural de la economía global.</p>
+
 </div>
 
 <div class="step">
+
 <div class="step-number">02</div>
+
 <h3>Diversification</h3>
-<p>Reducir concentración.</p>
+
+<p>Construcción de portafolio balanceado entre activos.</p>
+
 </div>
 
 <div class="step">
+
 <div class="step-number">03</div>
+
 <h3>Risk Management</h3>
-<p>Control disciplinado.</p>
+
+<p>Control disciplinado del riesgo y volatilidad.</p>
+
 </div>
 
 <div class="step">
+
 <div class="step-number">04</div>
+
 <h3>Long-Term Horizon</h3>
-<p>Decisiones multianuales.</p>
-</div>
 
-</div>
+<p>Decisiones con horizonte de inversión multianual.</p>
 
-</section>
-
-
-
-<section class="container" id="portfolio">
-
-<h2 class="section-title">Portfolio Holdings</h2>
-
-<table>
-
-<tr>
-<th>Asset</th>
-<th>Class</th>
-<th>Weight</th>
-</tr>
-
-<tr>
-<td>S&P 500 ETF</td>
-<td>Equities</td>
-<td>35%</td>
-</tr>
-
-<tr>
-<td>Total Market ETF</td>
-<td>Equities</td>
-<td>30%</td>
-</tr>
-
-<tr>
-<td>Multi Asset Fund</td>
-<td>Balanced</td>
-<td>25%</td>
-</tr>
-
-<tr>
-<td>Cash</td>
-<td>Liquidity</td>
-<td>10%</td>
-</tr>
-
-</table>
-
-</section>
-
-
-
-<section class="container" id="insights">
-
-<h2 class="section-title">Insights</h2>
-
-<p style="text-align:center;max-width:700px;margin:auto">
-
-Análisis periódico de mercados globales, tendencias macroeconómicas y estrategias de inversión de largo plazo.
-
-</p>
-
-</section>
-
-
-
-<section class="container" id="timeline">
-
-<h2 class="section-title">Historia</h2>
-
-<div class="timeline">
-
-<div class="event">
-<div class="year">2023</div>
-Fundación de Ciron Alpha Friends and Family.
-</div>
-
-<div class="event">
-<div class="year">2024</div>
-Expansión del portafolio hacia mercados globales.
-</div>
-
-<div class="event">
-<div class="year">2025</div>
-Crecimiento sostenido del capital gestionado.
 </div>
 
 </div>
@@ -378,21 +430,60 @@ Crecimiento sostenido del capital gestionado.
 </section>
 
 
+<!-- ALLOCATION -->
 
-<section class="container" id="contact">
+<section class="container container-light" id="portfolio">
+
+<h2 class="section-title">Asset Allocation</h2>
+
+<div class="chart-box">
+
+<canvas id="allocationChart"></canvas>
+
+</div>
+
+</section>
+
+
+<!-- PERFORMANCE -->
+
+<section class="container" id="performance">
+
+<h2 class="section-title">Performance</h2>
+
+<div class="chart-box">
+
+<canvas id="performanceChart"></canvas>
+
+</div>
+
+</section>
+
+
+<!-- GLOBAL EXPOSURE -->
+
+<section class="container container-light" id="global">
+
+<h2 class="section-title">Global Exposure</h2>
+
+<div id="map"></div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="container contact" id="contact">
 
 <h2 class="section-title">Contacto</h2>
 
-<p style="text-align:center">
+<p>Ciron Alpha Friends and Family</p>
 
-Ciron Alpha Friends and Family<br>
-Ciudad de México<br>
-contacto@cironalpha.com
+<p>Ciudad de México</p>
 
-</p>
+<p>contacto@cironalpha.com</p>
 
 </section>
-
 
 
 <div class="footer">
@@ -402,51 +493,68 @@ contacto@cironalpha.com
 </div>
 
 
-
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
 
-/* HERO MARKET ANIMATION */
+/* ASSET ALLOCATION CHART */
 
-const canvas=document.getElementById("marketCanvas")
-const ctx=canvas.getContext("2d")
-
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
-
-let points=[]
-
-for(let i=0;i<80;i++){
-points.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height
-})
+new Chart(
+document.getElementById('allocationChart'),
+{
+type:'doughnut',
+data:{
+labels:['US Equities','Multi-Asset Funds','Cash'],
+datasets:[{
+data:[65,25,10],
+backgroundColor:[
+"#2E5AAC",
+"#4C7DFF",
+"#BFD3FF"
+]
+}]
 }
-
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-ctx.strokeStyle="rgba(0,0,0,0.1)"
-
-for(let i=0;i<points.length;i++){
-
-let p=points[i]
-
-p.x+=Math.sin(Date.now()*0.001+i)*0.3
-
-ctx.beginPath()
-ctx.arc(p.x,p.y,1.5,0,Math.PI*2)
-ctx.stroke()
-
 }
+)
 
-requestAnimationFrame(animate)
 
+/* PERFORMANCE CHART */
+
+new Chart(
+document.getElementById('performanceChart'),
+{
+type:'line',
+data:{
+labels:['2021','2022','2023','2024','2025'],
+datasets:[
+{
+label:'Ciron Alpha',
+data:[100,108,118,134,150],
+borderColor:"#2E5AAC",
+fill:false
+},
+{
+label:'S&P 500',
+data:[100,105,112,126,140],
+borderColor:"#999",
+fill:false
 }
+]
+}
+}
+)
 
-animate()
+
+/* MAP */
+
+var map = L.map('map').setView([25,10],2)
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:5}).addTo(map)
+
+L.marker([40.7128,-74.006]).addTo(map).bindPopup("New York")
+L.marker([19.4326,-99.1332]).addTo(map).bindPopup("Ciudad de México")
+L.marker([51.5072,-0.1276]).addTo(map).bindPopup("London")
+L.marker([35.6762,139.6503]).addTo(map).bindPopup("Tokyo")
 
 </script>
 
