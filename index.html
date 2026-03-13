@@ -10,7 +10,11 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <style>
 
@@ -18,7 +22,7 @@ body{
 margin:0;
 font-family:'Inter',sans-serif;
 color:#111;
-background:#ffffff;
+background:white;
 }
 
 header{
@@ -46,24 +50,17 @@ font-size:14px;
 }
 
 .hero{
-
 height:90vh;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-
-background:linear-gradient(
-180deg,
-#ffffff,
-#f8f9fb
-);
-
+background:linear-gradient(180deg,#ffffff,#f4f6f8);
 }
 
 .hero h1{
 font-family:'Playfair Display';
-font-size:56px;
+font-size:60px;
 margin-bottom:20px;
 }
 
@@ -77,13 +74,13 @@ margin:auto;
 .container{
 max-width:1100px;
 margin:auto;
-padding:90px 20px;
+padding:100px 20px;
 }
 
 .section-title{
 font-family:'Playfair Display';
-font-size:34px;
-margin-bottom:40px;
+font-size:36px;
+margin-bottom:50px;
 text-align:center;
 }
 
@@ -94,34 +91,24 @@ gap:40px;
 }
 
 .card{
-padding:30px;
+padding:35px;
 border:1px solid #eee;
 border-radius:6px;
 transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-4px);
-}
-
-.card h3{
-margin-bottom:12px;
+transform:translateY(-5px);
 }
 
 .chart-box{
-max-width:700px;
+max-width:750px;
 margin:auto;
 }
 
-.map{
-
-height:400px;
-background-image:url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg');
-background-size:cover;
-background-position:center;
-
-opacity:0.7;
-
+#map{
+height:420px;
+border-radius:6px;
 }
 
 .contact{
@@ -143,7 +130,7 @@ grid-template-columns:1fr;
 }
 
 .hero h1{
-font-size:40px;
+font-size:42px;
 }
 
 }
@@ -156,18 +143,15 @@ font-size:40px;
 
 <header>
 
-<div class="logo">
-Ciron Alpha
-</div>
+<div class="logo">Ciron Alpha</div>
 
 <nav>
-
 <a href="#about">Filosofía</a>
 <a href="#strategy">Estrategia</a>
 <a href="#portfolio">Portafolio</a>
+<a href="#performance">Performance</a>
 <a href="#global">Global</a>
 <a href="#contact">Contacto</a>
-
 </nav>
 
 </header>
@@ -175,7 +159,7 @@ Ciron Alpha
 
 <section class="hero">
 
-<div>
+<div data-aos="fade-up">
 
 <h1>Ciron Alpha Friends and Family</h1>
 
@@ -183,7 +167,7 @@ Ciron Alpha
 Haciendo crecer el patrimonio de nuestro grupo de amigos y familia
 </p>
 
-<p style="margin-top:12px;color:#777;">
+<p style="margin-top:10px;color:#888;">
 Ciudad de México
 </p>
 
@@ -192,14 +176,14 @@ Ciudad de México
 </section>
 
 
-<section class="container" id="about">
+<section class="container" id="about" data-aos="fade-up">
 
 <h2 class="section-title">Filosofía de Inversión</h2>
 
-<p style="max-width:700px;margin:auto;text-align:center;">
+<p style="max-width:700px;margin:auto;text-align:center">
 
 Gestionamos capital de nuestro círculo cercano con un enfoque disciplinado, diversificado y de largo plazo.  
-Nuestro objetivo es capturar el crecimiento de los mercados globales manteniendo simplicidad, liquidez y eficiencia.
+Buscamos capturar el crecimiento de los mercados globales mediante estrategias eficientes y liquidez institucional.
 
 </p>
 
@@ -212,32 +196,32 @@ Nuestro objetivo es capturar el crecimiento de los mercados globales manteniendo
 
 <div class="grid-3">
 
-<div class="card">
+<div class="card" data-aos="fade-up">
 
 <h3>Acciones de EE.UU.</h3>
 
 <p>
-Exposición a índices amplios mediante ETFs diversificados que replican el crecimiento del mercado accionario estadounidense.
+Exposición a índices amplios mediante ETFs diversificados.
 </p>
 
 </div>
 
-<div class="card">
+<div class="card" data-aos="fade-up">
 
 <h3>Fondos Multi-Activos</h3>
 
 <p>
-Fondos mexicanos que integran renta fija, renta variable y exposición internacional para diversificación adicional.
+Fondos mexicanos balanceados con exposición global.
 </p>
 
 </div>
 
-<div class="card">
+<div class="card" data-aos="fade-up">
 
 <h3>Asignación Disciplinada</h3>
 
 <p>
-Rebalanceo periódico y control de riesgo para mantener un portafolio balanceado.
+Rebalanceo periódico para mantener control de riesgo.
 </p>
 
 </div>
@@ -249,11 +233,24 @@ Rebalanceo periódico y control de riesgo para mantener un portafolio balanceado
 
 <section class="container" id="portfolio">
 
-<h2 class="section-title">Portafolio</h2>
+<h2 class="section-title">Asignación del Portafolio</h2>
 
 <div class="chart-box">
 
-<canvas id="portfolioChart"></canvas>
+<canvas id="allocationChart"></canvas>
+
+</div>
+
+</section>
+
+
+<section class="container" id="performance">
+
+<h2 class="section-title">Performance</h2>
+
+<div class="chart-box">
+
+<canvas id="performanceChart"></canvas>
 
 </div>
 
@@ -264,7 +261,7 @@ Rebalanceo periódico y control de riesgo para mantener un portafolio balanceado
 
 <h2 class="section-title">Exposición Global</h2>
 
-<div class="map"></div>
+<div id="map"></div>
 
 </section>
 
@@ -273,17 +270,9 @@ Rebalanceo periódico y control de riesgo para mantener un portafolio balanceado
 
 <h2 class="section-title">Contacto</h2>
 
-<p>
-Ciron Alpha Friends and Family
-</p>
-
-<p>
-Ciudad de México
-</p>
-
-<p>
-contacto@cironalpha.com
-</p>
+<p>Ciron Alpha Friends and Family</p>
+<p>Ciudad de México</p>
+<p>contacto@cironalpha.com</p>
 
 </section>
 
@@ -295,42 +284,83 @@ contacto@cironalpha.com
 </div>
 
 
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 <script>
 
-const ctx = document.getElementById('portfolioChart');
+AOS.init({
+duration:900
+});
 
-new Chart(ctx, {
 
+new Chart(
+document.getElementById('allocationChart'),
+{
 type:'doughnut',
-
 data:{
 labels:[
 'US Equities',
 'Multi-Asset Funds',
 'Cash'
 ],
-
 datasets:[{
-
 data:[65,25,10]
-
 }]
-
 },
-
 options:{
 plugins:{
-legend:{
-position:'bottom'
+legend:{position:'bottom'}
 }
 }
+}
+);
 
-}
 
-});
+
+new Chart(
+document.getElementById('performanceChart'),
+{
+type:'line',
+data:{
+labels:[
+'2021','2022','2023','2024','2025'
+],
+datasets:[
+{
+label:'Ciron Alpha',
+data:[100,108,115,130,145],
+tension:0.4
+},
+{
+label:'S&P 500',
+data:[100,105,110,122,135],
+tension:0.4
+}
+]
+}
+}
+);
+
+
+
+var map = L.map('map').setView([25,10],2);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+maxZoom:5
+}).addTo(map);
+
+L.marker([40.7128,-74.006]).addTo(map).bindPopup("New York");
+
+L.marker([19.4326,-99.1332]).addTo(map).bindPopup("Ciudad de México");
+
+L.marker([51.5072,-0.1276]).addTo(map).bindPopup("London");
+
+L.marker([35.6762,139.6503]).addTo(map).bindPopup("Tokyo");
 
 </script>
 
-</body>
 
+</body>
 </html>
