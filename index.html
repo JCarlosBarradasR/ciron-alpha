@@ -16,16 +16,16 @@
 
 <style>
 
-/* COLOR SYSTEM */
-
 :root{
-
 --primary:#0B2545;
 --secondary:#2E5AAC;
 --accent:#4C7DFF;
 --light:#F5F7FB;
 --text:#111;
+}
 
+html{
+scroll-behavior:smooth;
 }
 
 body{
@@ -35,41 +35,31 @@ color:var(--text);
 background:white;
 }
 
-/* NAVBAR */
+/* NAV */
 
 header{
-
 display:flex;
 justify-content:space-between;
 align-items:center;
-
 padding:20px 60px;
-
 background:white;
 border-bottom:1px solid #eee;
-
 position:sticky;
 top:0;
-
 z-index:1000;
-
 }
 
 .logo{
-
 font-family:'Playfair Display';
 font-size:22px;
-
 }
 
 nav a{
-
 margin-left:24px;
 text-decoration:none;
 color:#333;
 font-size:14px;
 font-weight:500;
-
 }
 
 nav a:hover{
@@ -79,155 +69,133 @@ color:var(--secondary);
 /* HERO */
 
 .hero{
-
 height:90vh;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
 text-align:center;
-
-background:linear-gradient(
-135deg,
-var(--primary),
-var(--secondary)
-);
-
+background:linear-gradient(135deg,var(--primary),var(--secondary));
 color:white;
+position:relative;
+overflow:hidden;
+}
 
-padding:20px;
+.hero canvas{
+position:absolute;
+top:0;
+left:0;
+}
 
+.hero-content{
+position:relative;
+z-index:2;
 }
 
 .hero h1{
-
 font-family:'Playfair Display';
 font-size:60px;
-
 margin-bottom:20px;
-
 }
 
 .hero p{
-
 font-size:20px;
 opacity:.9;
-
 }
 
-/* GENERAL SECTIONS */
+/* GENERAL */
 
 .container{
-
 max-width:1100px;
 margin:auto;
-
 padding:100px 20px;
-
 }
 
 .container-light{
-
 background:var(--light);
-
 }
 
 .section-title{
-
 font-family:'Playfair Display';
 font-size:36px;
-
 text-align:center;
-
 margin-bottom:60px;
-
 }
 
 /* DASHBOARD */
 
 .dashboard{
-
 display:grid;
 grid-template-columns:repeat(4,1fr);
-
 gap:30px;
-
 }
 
 .metric{
-
 background:white;
-
 border:1px solid #e5e7ef;
-
 padding:30px;
-
 border-radius:8px;
-
 text-align:center;
-
 box-shadow:0 8px 20px rgba(0,0,0,0.04);
-
 }
 
 .metric-value{
-
-font-size:32px;
+font-size:34px;
 font-weight:600;
-
 margin-top:10px;
-
 color:var(--secondary);
-
 }
 
 /* FRAMEWORK */
 
 .framework{
-
 display:grid;
 grid-template-columns:repeat(4,1fr);
-
 gap:40px;
-
 }
 
-.step{
-text-align:center;
-}
+.step{text-align:center;}
 
 .step-number{
-
 font-size:28px;
 color:#999;
-
 margin-bottom:10px;
-
 }
 
-/* CHART */
+/* TABLE */
 
-.chart-box{
+table{
+width:100%;
+border-collapse:collapse;
+}
 
-max-width:600px;
-margin:auto;
+th,td{
+padding:16px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
 
+/* INSIGHTS */
+
+.insights{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:8px;
+border:1px solid #eee;
 }
 
 /* MAP */
 
 #map{
-
 height:420px;
-
 border-radius:6px;
-
 margin-top:40px;
-
 }
-
-/* Prevent map overlapping navbar */
 
 .leaflet-pane,
 .leaflet-top,
@@ -235,29 +203,13 @@ margin-top:40px;
 z-index:1 !important;
 }
 
-/* CONTACT */
-
-.contact{
-
-text-align:center;
-font-size:18px;
-
-}
-
 /* FOOTER */
 
 .footer{
-
 background:var(--primary);
-
 color:white;
-
 padding:50px;
-
 text-align:center;
-
-margin-top:60px;
-
 }
 
 /* MOBILE */
@@ -272,12 +224,12 @@ grid-template-columns:1fr 1fr;
 grid-template-columns:1fr;
 }
 
-.hero h1{
-font-size:42px;
+.insights{
+grid-template-columns:1fr;
 }
 
-header{
-padding:20px;
+.hero h1{
+font-size:42px;
 }
 
 }
@@ -297,7 +249,7 @@ padding:20px;
 <a href="#philosophy">Filosofía</a>
 <a href="#framework">Framework</a>
 <a href="#portfolio">Portafolio</a>
-<a href="#performance">Performance</a>
+<a href="#insights">Insights</a>
 <a href="#global">Global</a>
 <a href="#contact">Contacto</a>
 
@@ -310,13 +262,13 @@ padding:20px;
 
 <section class="hero">
 
-<div>
+<canvas id="heroCanvas"></canvas>
+
+<div class="hero-content">
 
 <h1>Ciron Alpha Friends and Family</h1>
 
-<p>
-Haciendo crecer el patrimonio de nuestro grupo de amigos y familia
-</p>
+<p>Haciendo crecer el patrimonio de nuestro grupo de amigos y familia</p>
 
 <p>Ciudad de México</p>
 
@@ -335,12 +287,12 @@ Haciendo crecer el patrimonio de nuestro grupo de amigos y familia
 
 <div class="metric">
 AUM
-<div class="metric-value">$50M</div>
+<div class="metric-value counter" data-target="50">$0</div>
 </div>
 
 <div class="metric">
 Annual Return
-<div class="metric-value">14.2%</div>
+<div class="metric-value counter" data-target="14">0%</div>
 </div>
 
 <div class="metric">
@@ -367,10 +319,9 @@ Sharpe Ratio
 <p style="max-width:700px;margin:auto;text-align:center">
 
 Gestionamos capital de nuestro círculo cercano con un enfoque disciplinado,
-diversificado y orientado al largo plazo.
-
-La estrategia se enfoca principalmente en **mercados públicos globales**,
-especialmente **US equities**, complementado con **fondos multi-activos en México**.
+diversificado y orientado al largo plazo. La estrategia se enfoca principalmente
+en mercados públicos globales, especialmente US equities, complementado con
+fondos multi-activos en México.
 
 </p>
 
@@ -386,43 +337,27 @@ especialmente **US equities**, complementado con **fondos multi-activos en Méxi
 <div class="framework">
 
 <div class="step">
-
 <div class="step-number">01</div>
-
 <h3>Market Exposure</h3>
-
-<p>Capturar crecimiento estructural de la economía global.</p>
-
+<p>Capturar crecimiento global.</p>
 </div>
 
 <div class="step">
-
 <div class="step-number">02</div>
-
 <h3>Diversification</h3>
-
-<p>Construcción de portafolio balanceado entre activos.</p>
-
+<p>Reducir concentración.</p>
 </div>
 
 <div class="step">
-
 <div class="step-number">03</div>
-
 <h3>Risk Management</h3>
-
-<p>Control disciplinado del riesgo y volatilidad.</p>
-
+<p>Control disciplinado del riesgo.</p>
 </div>
 
 <div class="step">
-
 <div class="step-number">04</div>
-
 <h3>Long-Term Horizon</h3>
-
-<p>Decisiones con horizonte de inversión multianual.</p>
-
+<p>Decisiones multianuales.</p>
 </div>
 
 </div>
@@ -430,37 +365,78 @@ especialmente **US equities**, complementado con **fondos multi-activos en Méxi
 </section>
 
 
-<!-- ALLOCATION -->
+<!-- HOLDINGS -->
 
 <section class="container container-light" id="portfolio">
 
-<h2 class="section-title">Asset Allocation</h2>
+<h2 class="section-title">Portfolio Holdings</h2>
 
-<div class="chart-box">
+<table>
 
-<canvas id="allocationChart"></canvas>
+<tr>
+<th>Asset</th>
+<th>Class</th>
+<th>Weight</th>
+</tr>
+
+<tr>
+<td>S&P 500 ETF</td>
+<td>Equities</td>
+<td>35%</td>
+</tr>
+
+<tr>
+<td>Total Market ETF</td>
+<td>Equities</td>
+<td>30%</td>
+</tr>
+
+<tr>
+<td>Global Multi-Asset Fund</td>
+<td>Balanced</td>
+<td>25%</td>
+</tr>
+
+<tr>
+<td>Cash</td>
+<td>Liquidity</td>
+<td>10%</td>
+</tr>
+
+</table>
+
+</section>
+
+
+<!-- INSIGHTS -->
+
+<section class="container" id="insights">
+
+<h2 class="section-title">Insights</h2>
+
+<div class="insights">
+
+<div class="card">
+<h3>Global Markets Outlook</h3>
+<p>Perspectiva de crecimiento estructural en mercados desarrollados.</p>
+</div>
+
+<div class="card">
+<h3>Diversification Strategy</h3>
+<p>Importancia de la diversificación entre activos globales.</p>
+</div>
+
+<div class="card">
+<h3>Long Term Investing</h3>
+<p>Disciplina y horizonte de inversión como fuente de retorno.</p>
+</div>
 
 </div>
 
 </section>
 
 
-<!-- PERFORMANCE -->
-
-<section class="container" id="performance">
-
-<h2 class="section-title">Performance</h2>
-
-<div class="chart-box">
-
-<canvas id="performanceChart"></canvas>
-
-</div>
-
-</section>
-
-
-<!-- GLOBAL EXPOSURE -->
+<!-- GLOBAL -->
 
 <section class="container container-light" id="global">
 
@@ -473,15 +449,17 @@ especialmente **US equities**, complementado con **fondos multi-activos en Méxi
 
 <!-- CONTACT -->
 
-<section class="container contact" id="contact">
+<section class="container" id="contact">
 
 <h2 class="section-title">Contacto</h2>
 
-<p>Ciron Alpha Friends and Family</p>
+<p style="text-align:center">
 
-<p>Ciudad de México</p>
+Ciron Alpha Friends and Family<br>
+Ciudad de México<br>
+contacto@cironalpha.com
 
-<p>contacto@cironalpha.com</p>
+</p>
 
 </section>
 
@@ -497,57 +475,84 @@ especialmente **US equities**, complementado con **fondos multi-activos en Méxi
 
 <script>
 
-/* ASSET ALLOCATION CHART */
+/* HERO MARKET LINES */
 
-new Chart(
-document.getElementById('allocationChart'),
-{
-type:'doughnut',
-data:{
-labels:['US Equities','Multi-Asset Funds','Cash'],
-datasets:[{
-data:[65,25,10],
-backgroundColor:[
-"#2E5AAC",
-"#4C7DFF",
-"#BFD3FF"
-]
-}]
-}
-}
-)
+const canvas=document.getElementById("heroCanvas")
+const ctx=canvas.getContext("2d")
 
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
 
-/* PERFORMANCE CHART */
+let lines=[]
 
-new Chart(
-document.getElementById('performanceChart'),
-{
-type:'line',
-data:{
-labels:['2021','2022','2023','2024','2025'],
-datasets:[
-{
-label:'Ciron Alpha',
-data:[100,108,118,134,150],
-borderColor:"#2E5AAC",
-fill:false
-},
-{
-label:'S&P 500',
-data:[100,105,112,126,140],
-borderColor:"#999",
-fill:false
+for(let i=0;i<25;i++){
+lines.push(Math.random()*canvas.height)
 }
-]
-}
-}
-)
 
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+ctx.strokeStyle="rgba(255,255,255,0.15)"
+ctx.lineWidth=2
+
+ctx.beginPath()
+
+for(let i=0;i<lines.length;i++){
+
+let x=i*(canvas.width/lines.length)
+
+let y=lines[i]
+
+ctx.lineTo(x,y)
+
+lines[i]+=Math.random()*2-1
+
+}
+
+ctx.stroke()
+
+requestAnimationFrame(draw)
+
+}
+
+draw()
+
+/* COUNTERS */
+
+const counters=document.querySelectorAll(".counter")
+
+counters.forEach(counter=>{
+
+const target=+counter.getAttribute("data-target")
+
+let count=0
+
+const update=()=>{
+
+count+=target/100
+
+if(count<target){
+
+counter.innerText=Math.floor(count)
+
+requestAnimationFrame(update)
+
+}else{
+
+counter.innerText=target
+
+}
+
+}
+
+update()
+
+})
 
 /* MAP */
 
-var map = L.map('map').setView([25,10],2)
+var map=L.map('map').setView([25,10],2)
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:5}).addTo(map)
 
