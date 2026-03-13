@@ -23,6 +23,12 @@ margin:0;
 font-family:'Inter',sans-serif;
 color:#111;
 background:white;
+transition:0.4s;
+}
+
+.dark{
+background:#0e1116;
+color:white;
 }
 
 header{
@@ -33,7 +39,7 @@ padding:22px 60px;
 border-bottom:1px solid #eee;
 position:sticky;
 top:0;
-background:white;
+background:inherit;
 z-index:10;
 }
 
@@ -45,7 +51,7 @@ font-size:22px;
 nav a{
 margin-left:25px;
 text-decoration:none;
-color:#111;
+color:inherit;
 font-size:14px;
 }
 
@@ -55,7 +61,11 @@ display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-background:linear-gradient(180deg,#ffffff,#f4f6f8);
+background:radial-gradient(circle at 30% 30%,#f6f7fb,#e9edf3);
+}
+
+.dark .hero{
+background:radial-gradient(circle at 30% 30%,#141821,#0e1116);
 }
 
 .hero h1{
@@ -66,9 +76,11 @@ margin-bottom:20px;
 
 .hero p{
 font-size:20px;
-color:#666;
-max-width:700px;
-margin:auto;
+color:#777;
+}
+
+.dark .hero p{
+color:#aaa;
 }
 
 .container{
@@ -97,6 +109,10 @@ border-radius:6px;
 transition:0.3s;
 }
 
+.dark .card{
+border:1px solid #222;
+}
+
 .card:hover{
 transform:translateY(-5px);
 }
@@ -104,6 +120,13 @@ transform:translateY(-5px);
 .chart-box{
 max-width:750px;
 margin:auto;
+}
+
+.counter{
+font-size:50px;
+font-weight:500;
+text-align:center;
+margin-top:20px;
 }
 
 #map{
@@ -121,6 +144,18 @@ border-top:1px solid #eee;
 padding:40px;
 text-align:center;
 color:#777;
+}
+
+.toggle{
+cursor:pointer;
+font-size:14px;
+border:1px solid #ccc;
+padding:6px 10px;
+border-radius:4px;
+}
+
+.dark .toggle{
+border:1px solid #444;
 }
 
 @media(max-width:900px){
@@ -146,12 +181,16 @@ font-size:42px;
 <div class="logo">Ciron Alpha</div>
 
 <nav>
+
 <a href="#about">Filosofía</a>
 <a href="#strategy">Estrategia</a>
 <a href="#portfolio">Portafolio</a>
 <a href="#performance">Performance</a>
 <a href="#global">Global</a>
 <a href="#contact">Contacto</a>
+
+<span class="toggle" onclick="toggleMode()">Modo</span>
+
 </nav>
 
 </header>
@@ -167,11 +206,18 @@ font-size:42px;
 Haciendo crecer el patrimonio de nuestro grupo de amigos y familia
 </p>
 
-<p style="margin-top:10px;color:#888;">
-Ciudad de México
-</p>
+<p style="margin-top:10px">Ciudad de México</p>
 
 </div>
+
+</section>
+
+
+<section class="container">
+
+<h2 class="section-title">Assets Under Management</h2>
+
+<div class="counter" id="aumCounter">$0</div>
 
 </section>
 
@@ -182,8 +228,7 @@ Ciudad de México
 
 <p style="max-width:700px;margin:auto;text-align:center">
 
-Gestionamos capital de nuestro círculo cercano con un enfoque disciplinado, diversificado y de largo plazo.  
-Buscamos capturar el crecimiento de los mercados globales mediante estrategias eficientes y liquidez institucional.
+Gestionamos capital de nuestro círculo cercano con un enfoque disciplinado, diversificado y de largo plazo.
 
 </p>
 
@@ -200,9 +245,7 @@ Buscamos capturar el crecimiento de los mercados globales mediante estrategias e
 
 <h3>Acciones de EE.UU.</h3>
 
-<p>
-Exposición a índices amplios mediante ETFs diversificados.
-</p>
+<p>Exposición a índices amplios mediante ETFs diversificados.</p>
 
 </div>
 
@@ -210,9 +253,7 @@ Exposición a índices amplios mediante ETFs diversificados.
 
 <h3>Fondos Multi-Activos</h3>
 
-<p>
-Fondos mexicanos balanceados con exposición global.
-</p>
+<p>Fondos mexicanos balanceados con exposición global.</p>
 
 </div>
 
@@ -220,9 +261,7 @@ Fondos mexicanos balanceados con exposición global.
 
 <h3>Asignación Disciplinada</h3>
 
-<p>
-Rebalanceo periódico para mantener control de riesgo.
-</p>
+<p>Rebalanceo periódico y control de riesgo.</p>
 
 </div>
 
@@ -290,9 +329,7 @@ Rebalanceo periódico para mantener control de riesgo.
 
 <script>
 
-AOS.init({
-duration:900
-});
+AOS.init({duration:900});
 
 
 new Chart(
@@ -300,23 +337,12 @@ document.getElementById('allocationChart'),
 {
 type:'doughnut',
 data:{
-labels:[
-'US Equities',
-'Multi-Asset Funds',
-'Cash'
-],
-datasets:[{
-data:[65,25,10]
-}]
+labels:['US Equities','Multi-Asset Funds','Cash'],
+datasets:[{data:[65,25,10]}]
 },
-options:{
-plugins:{
-legend:{position:'bottom'}
-}
-}
+options:{plugins:{legend:{position:'bottom'}}}
 }
 );
-
 
 
 new Chart(
@@ -324,43 +350,47 @@ document.getElementById('performanceChart'),
 {
 type:'line',
 data:{
-labels:[
-'2021','2022','2023','2024','2025'
-],
+labels:['2021','2022','2023','2024','2025'],
 datasets:[
-{
-label:'Ciron Alpha',
-data:[100,108,115,130,145],
-tension:0.4
-},
-{
-label:'S&P 500',
-data:[100,105,110,122,135],
-tension:0.4
-}
+{label:'Ciron Alpha',data:[100,108,115,130,145],tension:0.4},
+{label:'S&P 500',data:[100,105,110,122,135],tension:0.4}
 ]
 }
 }
 );
 
 
-
 var map = L.map('map').setView([25,10],2);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-maxZoom:5
-}).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:5}).addTo(map);
 
 L.marker([40.7128,-74.006]).addTo(map).bindPopup("New York");
-
 L.marker([19.4326,-99.1332]).addTo(map).bindPopup("Ciudad de México");
-
 L.marker([51.5072,-0.1276]).addTo(map).bindPopup("London");
-
 L.marker([35.6762,139.6503]).addTo(map).bindPopup("Tokyo");
 
-</script>
 
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+
+
+let aum=0
+let target=50000000
+
+let counter=setInterval(function(){
+
+aum+=1000000
+
+document.getElementById("aumCounter").innerText="$"+(aum/1000000)+"M"
+
+if(aum>=target){
+clearInterval(counter)
+}
+
+},40)
+
+</script>
 
 </body>
 </html>
