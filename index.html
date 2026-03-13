@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ciron Alpha Friends and Family</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+color:#111;
+background:#ffffff;
+line-height:1.6;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:80px 20px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+border-bottom:1px solid #eee;
+position:sticky;
+top:0;
+background:white;
+}
+
+.logo{
+font-family:'Playfair Display',serif;
+font-size:22px;
+}
+
+nav a{
+margin-left:25px;
+text-decoration:none;
+color:#111;
+font-size:14px;
+}
+
+.hero{
+height:80vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.hero h1{
+font-family:'Playfair Display',serif;
+font-size:48px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:20px;
+color:#555;
+max-width:700px;
+margin:auto;
+}
+
+.section-title{
+font-family:'Playfair Display',serif;
+font-size:32px;
+margin-bottom:30px;
+}
+
+.grid-2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+}
+
+.grid-3{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:40px;
+}
+
+.card h3{
+margin-bottom:10px;
+font-weight:500;
+}
+
+.table{
+width:100%;
+border-collapse:collapse;
+}
+
+.table th,
+.table td{
+padding:14px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+.footer{
+border-top:1px solid #eee;
+padding:40px;
+text-align:center;
+color:#777;
+font-size:14px;
+}
+
+@media(max-width:800px){
+
+.grid-2{
+grid-template-columns:1fr;
+}
+
+.grid-3{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+Ciron Alpha
+</div>
+
+<nav>
+<a href="#about">Sobre Nosotros</a>
+<a href="#strategy">Estrategia</a>
+<a href="#portfolio">Portafolio</a>
+<a href="#contact">Contacto</a>
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<div>
+
+<h1>Ciron Alpha Friends and Family</h1>
+
+<p>
+Haciendo crecer el patrimonio de nuestro grupo de amigos y familia
+</p>
+
+<p style="margin-top:15px;color:#777;">
+Ciudad de México
+</p>
+
+</div>
+
+</section>
+
+
+<section class="container" id="about">
+
+<h2 class="section-title">Nuestra Filosofía</h2>
+
+<div class="grid-2">
+
+<div>
+
+<p>
+Ciron Alpha Friends and Family gestiona capital de nuestro círculo cercano con un enfoque disciplinado, diversificado y de largo plazo.
+</p>
+
+<p>
+Nuestro objetivo es hacer crecer el patrimonio colectivo mediante exposición a mercados globales y estrategias eficientes.
+</p>
+
+</div>
+
+<div>
+
+<ul>
+
+<li>Mercado accionario de Estados Unidos</li>
+<li>ETFs diversificados</li>
+<li>Fondos multi-activos mexicanos</li>
+<li>Estrategias líquidas</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="container" id="strategy">
+
+<h2 class="section-title">Estrategia de Inversión</h2>
+
+<div class="grid-3">
+
+<div class="card">
+
+<h3>Acciones de Estados Unidos</h3>
+
+<p>
+Exposición a índices amplios mediante ETFs diversificados que capturan el crecimiento de las empresas líderes del mundo.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Fondos Multi-Activos</h3>
+
+<p>
+Complementamos la cartera con fondos balanceados mexicanos que integran renta fija y renta variable.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Diversificación</h3>
+
+<p>
+Asignación disciplinada de activos para mantener equilibrio entre crecimiento y estabilidad.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="container" id="portfolio">
+
+<h2 class="section-title">Portafolio</h2>
+
+<table class="table">
+
+<tr>
+<th>Instrumento</th>
+<th>Clase de Activo</th>
+</tr>
+
+<tr>
+<td>ETF Mercado Total US</td>
+<td>Renta Variable</td>
+</tr>
+
+<tr>
+<td>ETF S&P 500</td>
+<td>Renta Variable</td>
+</tr>
+
+<tr>
+<td>Fondo Multi-Activo México</td>
+<td>Multi-Asset</td>
+</tr>
+
+</table>
+
+</section>
+
+
+<section class="container" id="contact">
+
+<h2 class="section-title">Contacto</h2>
+
+<p>
+Ciron Alpha Friends and Family
+</p>
+
+<p>
+Ciudad de México, México
+</p>
+
+<p>
+contacto@cironalpha.com
+</p>
+
+</section>
+
+
+<div class="footer">
+
+© 2026 Ciron Alpha Friends and Family
+
+</div>
+
+</body>
+</html>
